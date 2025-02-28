@@ -89,7 +89,6 @@ error_t Program::start(int argc, char* argv[]) {
         }
         std::cout << std::endl;
     }
-    userInputted.store(false);
     th.join();
 
     return EXIT_SUCCESS;
