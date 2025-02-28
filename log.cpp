@@ -21,7 +21,7 @@ const std::string& Log::getCurrentMessage() const {
 
 bool Log::isInputValid(const std::string& inputText,const std::string& inputLevel) {
     if(inputText.empty()) {
-        std::cout << "Empty messages are not allowed" << "\n";
+        std::cout << "Error: Empty messages are not allowed" << "\n";
         return false;
     }
     
@@ -30,7 +30,7 @@ bool Log::isInputValid(const std::string& inputText,const std::string& inputLeve
         importanceLevel level = static_cast<importanceLevel>(firstChar - 48); // convertion from char to int
  
         if(!(level >= importanceLevel::LOW && level <= importanceLevel::HIGH)) {
-            std::cout << "Incorrect importanceLevel" << "\n";
+            std::cout << "Error: Incorrect importanceLevel" << "\n";
             return false;
         }
 
@@ -43,7 +43,7 @@ bool Log::isInputValid(const std::string& inputText,const std::string& inputLeve
     };
 
     if((quotes_pos[0] == std::string::npos) || (quotes_pos[1] == std::string::npos) || quotes_pos[0] == quotes_pos[1]) {
-        std::cout << "Quotes must be used" << "\n";
+        std::cout << "Error: Quotes must be used" << "\n";
         return false;
     }
      
