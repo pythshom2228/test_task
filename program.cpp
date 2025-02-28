@@ -10,11 +10,11 @@ Program::Program() noexcept {}
 
 bool Program::isValidArgs(int argc, char* argv[]) {    
     if(argc > 3 || argc < 2) {
-        std::cout << "Incorrect input number, try again" << "\n";
+        std::cout << "Error: Incorrect input number, try again" << "\n";
         return false; 
     }
     if(argc == 2) {
-        std::cout << "Default importance level must be set" << "\n";
+        std::cout << "Error: Default importance level must be set" << "\n";
         return false;
     }
     
@@ -28,12 +28,12 @@ bool Program::isValidImportanceLevel(const std::string& arg_str) {
     try {
         arg = static_cast<importanceLevel>(std::stoi(arg_str));
     } catch(...) {
-        std::cout << "Incorrect importance level" << "\n";
+        std::cout << "Error: Incorrect importance level" << "\n";
         return false;
     }
   
     if(!(arg >= importanceLevel::LOW && arg <= importanceLevel::HIGH)) {
-        std::cout << "Invalid importance level" << "\n";
+        std::cout << "Error: Invalid importance level" << "\n";
         return false;
     }
     return true;
