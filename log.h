@@ -14,7 +14,7 @@ namespace loglib {
     class Log {
     public:
         
-        explicit Log(const std::string& fileName, importanceLevel defaultLevel);
+        explicit Log(const std::string& fileName, importanceLevel defaultLevel) noexcept;
 
         void changeDefaultLevel(importanceLevel defaultLevel); 
 
