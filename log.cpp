@@ -4,7 +4,7 @@
 
 using namespace loglib;
 
-Log::Log(const std::string& fileName, importanceLevel defaultLevel) : 
+Log::Log(const std::string& fileName, importanceLevel defaultLevel) noexcept : 
     _fileName(fileName), _defaultLevel(defaultLevel)  {
         _file.open(_fileName,std::ios::app);
         _file.close();
