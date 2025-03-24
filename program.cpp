@@ -56,40 +56,28 @@ error_t Program::start(int argc, char* argv[]) {
     std::atomic<bool> userInputted(false);
     std::mutex logMutex;
 
-    this->th = std::thread(
-            [&]() mutable {
-            while (running.load()) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
-                if(userInputted.exchange(false)) {
-                    std::lock_guard<std::mutex> lock(logMutex);
-                    log.saveMessage();
-                }
+    auto save = [&]() mutable {
+        while (running.load()) {
+            if(userInputted.exchange(false)) {
+                std::lock_guard<std::mutex> lock(logMutex);
+                log.saveMessage();
             }
         }
-    );
+    };
+
+
+    this->th = std::thread(save);
 
     while(running) {
         {
             std::lock_guard<std::mutex> lock(logMutex);
             std::cin >> log; 
         }
+    
         userInputted.store(true);
 
-        while(true) {
-            std::cout << "Continue to write messages? (Y/N) ";
-            std::string ans;
-            std::getline(std::cin, ans);
-            if(ans == "Y" || ans=="y") 
-                break;
-            else if (ans=="N" || ans=="n") {
-                running = false;
-                break;
-            }
-           std::cout << "No such answer" << "\n";
-        }
-        std::cout << std::endl;
+        std::cout << "\n";
     }
     th.join();
-
     return EXIT_SUCCESS;
 }
