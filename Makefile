@@ -1,6 +1,5 @@
 CC=g++
-CFLAGS=-Wall -Wextra -std=c++17 -O2 \
-		-fsanitize=address -fsanitize=undefined
+CFLAGS=-Wall -Wextra -std=c++17 -O2
 
 TARGET=program
 SOURCES=program.cpp
